@@ -30,6 +30,10 @@ inputs:
     description: "Auto use the latest kernel."
     required: false
     default: "true"
+  kernel_repo:
+    description: "Select kernel repository."
+    required: false
+    default: "https://github.com/ophub/kernel/tree/main/pub"
   openwrt_size:
     description: "Set the rootfs size(Unit: MiB)."
     required: false
@@ -84,6 +88,7 @@ runs:
         [[ -n "${{ inputs.kernel_usage }}" ]] && make_command="${make_command} -u ${{ inputs.kernel_usage }}"
         [[ -n "${{ inputs.openwrt_kernel }}" ]] && make_command="${make_command} -k ${{ inputs.openwrt_kernel }}"
         [[ -n "${{ inputs.auto_kernel }}" ]] && make_command="${make_command} -a ${{ inputs.auto_kernel }}"
+        [[ -n "${{ inputs.kernel_repo }}" ]] && make_command="${make_command} -r ${{ inputs.kernel_repo }}"
         [[ -n "${{ inputs.openwrt_size }}" ]] && make_command="${make_command} -s ${{ inputs.openwrt_size }}"
         [[ -n "${{ inputs.builder_name }}" ]] && make_command="${make_command} -n ${{ inputs.builder_name }}"
         [[ -n "${{ inputs.gh_token }}" ]] && make_command="${make_command} -g ${{ inputs.gh_token }}"
